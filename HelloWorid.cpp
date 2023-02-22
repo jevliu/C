@@ -38,13 +38,14 @@ int main()
     do
     {
         // 使用continue语句跳过15执行下一次循环
-        if (i == 15)
+        if (i == 19)
         {
             i = i + 1;
             continue;
         }
         cout << "i的值为：" << i << endl;
         i++;
+        cout << "这是新增的语句"
         // if (i > 15)
         // {
         //     break;
@@ -78,5 +79,5 @@ int main()
     //     break;
     // }
 
-        return 0;
+    return 0;
 }
