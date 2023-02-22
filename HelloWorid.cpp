@@ -45,7 +45,7 @@ int main()
         }
         cout << "i的值为：" << i << endl;
         i++;
-        cout << "这是新增的语句"
+        cout << "这是新增的语句";
         // if (i > 15)
         // {
         //     break;
