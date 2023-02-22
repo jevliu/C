@@ -1,5 +1,7 @@
 #include <iostream>
 using namespace std;
+// 函数声明
+int max(int num1, int num2);
 
 int main()
 {
@@ -45,7 +47,7 @@ int main()
         }
         cout << "i的值为：" << i << endl;
         i++;
-        cout << "这是新增的语句";
+        cout << "这是新增的语句" << endl;
         // if (i > 15)
         // {
         //     break;
@@ -79,5 +81,28 @@ int main()
     //     break;
     // }
 
+    // 调用max函数
+    int ret;
+    ret = max(5, 33333);
+    cout << "较大的值为" << ret << endl;
+
     return 0;
+}
+
+// 创建一个函数比较两个数的大小并返回较大的那个
+
+int max(int num1, int num2)
+{
+    // 闯将一个临时变量
+    int result;
+
+    if (num1 > num2)
+    {
+        result = num1;
+    }
+    else
+    {
+        result = num2;
+    }
+    return result;
 }
