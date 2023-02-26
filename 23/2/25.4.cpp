@@ -6,38 +6,46 @@
 */
 #include <iostream>
 #include <vector>
-
 using namespace std;
 
-vector<int> selectionSort(vector<int> &nums)
+void selectionSort(vector<int> &nums)
 {
     int n = nums.size();
-    bool swapped = true;
-    for (int i = 0; i < n - 1 && swapped; i++)
+    bool sorted = false;
+    while (!sorted)
     {
-        int min_idx = i;
-        swapped = false;
-        for (int j = i + 1; j < n; j++)
+        sorted = true;
+        bool swapped = false;
+        for (int i = 0; i < n - 1; i++)
         {
-            if (nums[j] < nums[min_idx])
+            if (nums[i] > nums[i + 1])
             {
-                min_idx = j;
+                swap(nums[i], nums[i + 1]);
                 swapped = true;
             }
         }
-        if (swapped)
+        n--;
+        if (!swapped)
         {
-            swap(nums[i], nums[min_idx]);
+            break;
+        }
+        sorted = false;
+        for (int i = n - 1; i > 0; i--)
+        {
+            if (nums[i] < nums[i - 1])
+            {
+                swap(nums[i], nums[i - 1]);
+                sorted = false;
+            }
         }
     }
-    return nums;
 }
 
 int main()
 {
-    vector<int> nums = {3, 5, 2, 4, 1};
-    vector<int> sorted_nums = selectionSort(nums);
-    for (int num : sorted_nums)
+    vector<int> nums = {1, 3, 2, 5, 4};
+    selectionSort(nums);
+    for (int num : nums)
     {
         cout << num << " ";
     }
