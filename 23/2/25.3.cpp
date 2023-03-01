@@ -53,7 +53,7 @@ int main()
     }
     cout << endl;
 
-    int x = 10; // 带插入的值
+    int x = 22; // 带插入的值
     insertElement(arr, n, x);
 
     // 输出插入新数字后的数组

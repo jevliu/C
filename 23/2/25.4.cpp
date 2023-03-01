@@ -14,7 +14,7 @@ void selectionSort(vector<int> &nums)
     bool sorted = false;
     while (!sorted)
     {
-        sorted = true;
+        bool sorted = true;
         bool swapped = false;
         for (int i = 0; i < n - 1; i++)
         {
