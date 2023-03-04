@@ -8,7 +8,7 @@ void josephus(int n, int k)
 {
     list<int> student;
     // 向student中依次传入学生的n个编号
-    for (int i = 1; i < n + 1; i++)
+    for (int i = 1; i <= n; i++)
     {
         student.push_back(i);
     }
@@ -25,6 +25,7 @@ void josephus(int n, int k)
             if (it == student.end())
             {
                 it = student.begin();
+                // cout << "it重新指向了开头位置：" << *it << "->";
             }
         }
         // 按照样例格式输出第k个位置学生的编号信息
@@ -34,21 +35,23 @@ void josephus(int n, int k)
         it = student.erase(it);
         if (it == student.end())
         {
-            it == student.begin();
+            it = student.begin();
+            // cout << "删除元素为末尾值后，it指向了开头位置值为：" << *it << endl;
         }
     }
     // 当list中只有一个孩子时，输出这个幸运儿的编号
     cout << *student.begin() << endl;
-    cout << "最后得到山芋的是第" << *student.begin() << "个孩子。" << endl;
+    // cout << "最后得到山芋的是第" << *student.begin() << "个孩子。" << endl;
 }
 
 int main()
 {
     // 初始化变量
     int n, k;
-    cout << "请输入n和k：" << endl;
+    // cout << "请输入n和k：" << endl;
     cin >> n;
     cin >> k;
     // 调用约瑟夫函数
     josephus(n, k);
+    return 0;
 }

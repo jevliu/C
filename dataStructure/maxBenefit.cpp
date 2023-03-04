@@ -29,7 +29,7 @@ int main()
     int const MAX_LENGTH = 100;
     int num;
 
-    cout << "输入：" << endl;
+    // cout << "输入：" << endl;
     cin >> num;
 
     int array[MAX_LENGTH];
@@ -42,6 +42,6 @@ int main()
 
     // 调用求最大收益的函数并将函数结果保存在一个变量中
     int max_benefit = maxBenefit(array, num);
-    cout << "输出：" << endl;
+    // cout << "输出：" << endl;
     cout << max_benefit << endl;
 }
