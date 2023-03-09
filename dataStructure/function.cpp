@@ -10,7 +10,7 @@ using namespace std;
 int main()
 {
     long long a, b;
-    long long t, w;
+    long long prev, current;
     int x, y, n;
     cin >> a >> b >> n;
     // 若输入的次数n不为0则正常进行计算，否则直接输出1，程序结束
@@ -27,10 +27,10 @@ int main()
             q.push(0);
             for (int j = 1; j <= i + 2; j++)
             {
-                t = q.front();
+                prev = q.front();
                 q.pop();
-                w = q.front();
-                q.push(b * t + a * w); // 计算系数，利用杨辉三角
+                current = q.front();
+                q.push(b * prev + a * current); // 计算系数，利用杨辉三角
             }
         }
         q.pop();
