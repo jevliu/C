@@ -1,70 +1,40 @@
 #include <iostream>
-
+#include <vector>
 using namespace std;
 
-int getMax(int arr[], int n)
+vector<int> addBinary(vector<int> &A, vector<int> &B)
 {
-    int max = arr[0];
-    for (int i = 1; i < n; i++)
-    {
-        if (arr[i] > max)
-        {
-            max = arr[i];
-        }
-    }
-    return max;
-}
-
-void countSort(int arr[], int n, int exp)
-{
-    const int MAX = 100;
-    int bucket[10] = {0};
-    int output[MAX];
+    int n = A.size();
+    vector<int> C(n + 1, 0); // 初始化长度为n+1的数组C，全部赋值为0。
+    int carry = 0;           // 初始化进位为0
     for (int i = 0; i < n; i++)
     {
-        bucket[(arr[i] / exp) % 10]++;
+        int sum = A[i] + B[i] + carry; // 计算当前位的和
+        C[i] = sum % 2;                // 将和的个位保存到C数组中
+        carry = sum / 2;               // 计算进位
     }
-    for (int i = 1; i < 10; i++)
-    {
-        bucket[i] += bucket[i - 1];
-    }
-    for (int i = n - 1; i >= 0; i--)
-    {
-        output[bucket[(arr[i] / exp) % 10] - 1] = arr[i];
-        bucket[(arr[i] / exp) % 10]--;
-    }
-    for (int i = 0; i < n; i++)
-    {
-        arr[i] = output[i];
-    }
-}
-
-void radixSort(int arr[], int n)
-{
-    int max = getMax(arr, n);
-    for (int exp = 1; max / exp > 0; exp *= 10)
-    {
-        countSort(arr, n, exp);
-        for (int i = 0; i < n - 1; i++)
-        {
-            cout << arr[i] << " ";
-        }
-        cout << arr[n - 1] << endl;
-    }
+    C[n] = carry; // 将最后一次进位加到C的最高位上
+    return C;     // 返回结果数组C
 }
 
 int main()
 {
-    const int MAX = 100;
-    int arr[MAX];
-    int n = 0;
-
-    cin >> n;
+    string strA, strB;
+    cout << "请输入两个二进制数：" << endl;
+    cin >> strA >> strB;
+    int n = strA.size();
+    vector<int> A(n), B(n);
     for (int i = 0; i < n; i++)
     {
-        cin >> arr[i];
+        A[i] = strA[i] - '0'; // 将字符转化为整数，存储在数组A中
+        B[i] = strB[i] - '0'; // 将字符转化为整数，存储在数组B中
     }
-    radixSort(arr, n);
-
+    vector<int> C = addBinary(A, B); // 计算A和B的和
+    cout << "计算结果为：";
+    for (int i = n; i >= 0; i--)
+    {
+        cout << C[i]; // 从最高位向最低位输出结果
+    }
+    cout << endl;
     return 0;
 }
