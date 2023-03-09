@@ -1,81 +1,88 @@
 /*
 二元一次方程组的求解问题
-2023/3/7
+CSDN社区答案
+2023/3/7、9
 */
 #include <iostream>
+#include <queue>
 using namespace std;
-bool first = 1;
-void output(int cof, int pow, int n)
-{
-    // 系数为0的情况
-    if (cof == 0)
-    {
-        return;
-    };
-    if (!first && cof > 0)
-    {
-        cout << "+";
-    }
-
-    cout << cof;
-    first = 0;
-    // 输出x
-    if (n - pow > 0)
-    {
-        cout << "x";
-    }
-    if (n - pow > 1)
-    {
-        cout << "^" << n - pow;
-    }
-    // 输出y
-    if (n - pow > 0)
-    {
-        cout << "y";
-    }
-    if (n - pow > 1)
-    {
-        cout << "^" << n - pow;
-    }
-}
 
 int main()
 {
-    int a, b;
-    int n;
-    int MAX_SIZE = n + 3;
+    long long a, b;
+    long long t, w;
+    int x, y, n;
     cin >> a >> b >> n;
-    int *queue = new int[n + 3];
-    int pos = 0;
-    int head = 0;
-
-    queue[pos++] = 0;
-    queue[pos++] = a;
-    queue[pos++] = b;
-    first = 1;
-    // 出队第一个值
-    int temp1 = queue[(head++) % (MAX_SIZE)];
-    // 在循环中出队第二个值
-    int temp2;
-    // 输出信息
-    int outputcount = 0;
-    for (int i = 0; i < n; i++)
+    // 若输入的次数n不为0则正常进行计算，否则直接输出1，程序结束
+    if (n != 0)
     {
-        // 入队
-        queue[(pos++) % (MAX_SIZE)] = 0;
-
-        for (int j = 0; j < i + 2; j++)
+        x = n;
+        y = 0;
+        queue<long long> q;
+        q.push(0);
+        q.push(a);
+        q.push(b);
+        for (int i = 1; i < n; i++)
         {
-            temp2 = queue[((head++) % (MAX_SIZE))];
-            if (i == n - 1)
+            q.push(0);
+            for (int j = 1; j <= i + 2; j++)
             {
-                output(temp1 * b + temp2 * a, outputcount++, n);
-                // cout << temp1 * b + temp2 * a << endl;
+                t = q.front();
+                q.pop();
+                w = q.front();
+                q.push(b * t + a * w); // 计算系数，利用杨辉三角
             }
-            queue[(pos++) % MAX_SIZE] = temp1 * b + temp2 * a;
-            temp1 = temp2;
+        }
+        q.pop();
+        while (!q.empty())
+        {
+            // 系数为1时不输出系数，系数为-1是只输出负号，其他情况正常输出队列中的系数
+            if (q.front() == 1)
+            {
+            }
+            else if (q.front() == -1)
+            {
+                cout << "-";
+            }
+            else
+            {
+                cout << q.front();
+            }
+            // 根据当前x的幂次来决定x的输出形式
+            if (x == 1)
+            {
+                cout << "x";
+            }
+            else if (x == 0)
+            {
+            }
+            else
+            {
+                cout << "x^" << x;
+            }
+            // 根据当前y的幂次来决定y的输出形式
+            if (y == 1)
+            {
+                cout << "y";
+            }
+            else if (y == 0)
+            {
+            }
+            else
+            {
+                cout << "y^" << y;
+            }
+            x--;
+            y++;
+
+            q.pop();
+            if (!q.empty() && q.front() > 0)
+                cout << "+";
         }
     }
-
+    else
+    {
+        cout << 1 << endl;
+    }
     return 0;
 }
